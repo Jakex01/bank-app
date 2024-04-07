@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+
+<div class="personal-finance">
+
+    <h2>Cards</h2>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Use *ngFor to dynamically create a slide for each card in the cards array -->
+            <div class="swiper-slide" *ngFor="let card of cards">
+                <div class="card-btn" (click)="toggleCardDetails(card)">
+                    <div class="card-info">
+                        <span class="card-number">Card number: {{ '**** **** **** ' + card.cardNumber.slice(-4) }}</span>
+                        <span class="expiry-date">VD: {{ card.creditCardValidationDate | date: 'yyyy/MM/dd' }}</span>
+                    </div>
+                    <span class="card-name"> {{ card.cardType }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="card-details" *ngIf="selectedCard">
+        <div>
+            <label for="cardNumber">Card Number:</label>
+            <input id="cardNumber" type="text" [value]="selectedCard.cardNumber" readonly>
+        </div>
+        <div>
+            <label for="cvv">CVV:</label>
+            <input id="cvv" type="text" [value]="selectedCard.cvvCode" readonly>
+        </div>
+        <div>
+            <label for="creditLimit">Card status:</label>
+            <input id="creditLimit" type="text" [value]="selectedCard.cardStatus" readonly>
+        </div>
+        <div>
+            <label for="moneyTaken">Valid date:</label>
+            <input id="moneyTaken" type="text" [value]="selectedCard.creditCardValidationDate | date" readonly>
+        </div>
+        <div>
+            <label for="nextPayment">Card type:</label>
+            <input id="nextPayment" type="text" [value]="selectedCard.cardType" readonly>
+        </div>
+        <div>
+            <label for="bankAccNumb">Bank account number :</label>
+            <input id="bankAccNumb" type="text" [value]="selectedCard.bankAccNumber" readonly>
+        </div>
+    </div>
+
+
+    <hr class="section-divider">
+
+
+    <div class="transactions-section">
+        <h2>Operation History</h2>
+        <div class="transaction" *ngFor="let transaction of operations">
+            <div class="transaction-info">
+                <span>{{ transaction.operationDate | date: 'dd/MM/yyyy' }}</span>
+                <span>{{ transaction.operationDescription }}</span>
+                <span [ngClass]="{
+                'negative': transaction.operationType === 'WITHDRAW' ||
+                            transaction.operationType === 'TRANSFER_OUTGOING' ||
+                            transaction.operationType === 'PAYMENT',
+                'positive': transaction.operationType !== 'WITHDRAW' &&
+                            transaction.operationType !== 'TRANSFER_OUTGOING' &&
+                            transaction.operationType !== 'PAYMENT'
+              }">
+              {{ transaction.operationType === 'WITHDRAW' || transaction.operationType === 'TRANSFER_OUTGOING' || transaction.operationType === 'PAYMENT' ? '-' : '' }}{{ transaction.amount | currency: 'USD' }}
+            </span>
+            </div>
+            <div class="transaction-actions">
+                <button class="action-btn" (click)="openModal(transaction)">
+                    <img src="./assets/info_FILL0_wght400_GRAD0_opsz24.png" alt="Info icon">
+                </button>
+                <button class="action-btn" (click)="downloadTransactionPdf(transaction.id)">
+                    <img src="./assets/picture_as_pdf_FILL0_wght400_GRAD0_opsz24.png" alt="PDF icon">
+                </button>
+
+            </div>
+
+
+        </div>
+        <button (click)="loadMoreOperations()" [disabled]="!moreOperationsAvailable" class="show-more-btn">Show More</button>
+
+    </div>
+
+
+</div>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Footer Links Section -->
+        <div class="footer-links">
+            <div class="link-section">
+                <h4>Section</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="link-section">
+                <!-- Duplicate as needed -->
+            </div>
+            <div class="link-section">
+                <!-- Duplicate as needed -->
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <h4>Subscribe to our newsletter</h4>
+            <p class="monthly">Monthly digest of whats new and exciting from us.</p>
+            <input type="email" placeholder="Email address">
+            <button type="button">Subscribe</button>
+        </div>
+
+        <!-- Social Links Section -->
+        <div class="social-links">
+            <a href="https://twitter.com/yourcompany" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/yourcompany" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/yourcompany" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+    </div>
+
+    <div class="footer-legal">
+        <p>Easy bank &copy; 2024 Jakub Sokol, Inc. All rights reserved.</p>
+    </div>
+</footer>
+
+<div class="modal" *ngIf="selectedOperation">
+    <div class="modal-content">
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+        <h3>Operation date: {{ selectedOperation.operationDate | date}}</h3>
+        <p>Operation description: {{ selectedOperation.operationDescription }}</p>
+        <p>Amount: {{ selectedOperation.amount }}</p>
+        <p> To: {{selectedOperation.operationReceiver}}</p>
+        <p>Type: {{ selectedOperation.operationType }}</p>
+
+    </div>
+</div>

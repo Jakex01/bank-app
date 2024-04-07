@@ -1,0 +1,490 @@
+
+.personal-finance {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.2);
+    max-width:800px;
+    margin: 0px auto;
+}
+
+h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+.transaction, .card {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 5px solid #0024a3;
+}
+
+.transaction span, .card span {
+    display: block;
+}
+
+.negative {
+    color: #e74c3c;
+}
+
+.positive {
+    color: #2ecc71;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie przycisków */
+    gap: 10px; /* Odstęp pomiędzy przyciskami */
+}
+
+.set-current-btn, .edit-btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.set-current-btn {
+    background-color: #4CAF50; /* Zielony */
+    color: white;
+}
+
+.edit-btn {
+    background-color: #008CBA; /* Niebieski */
+    color: white;
+}
+
+.set-current-btn:hover, .edit-btn:hover {
+    opacity: 0.8;
+}
+
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px;
+    border: none;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Open Sans', sans-serif; /* Elegancka, czytelna czcionka */
+    color: #333; /* Ciemniejszy odcień szarości dla lepszej czytelności */
+}
+
+.modal-content h3, .modal-content p {
+    margin: 10px 0;
+}
+/* Stylowanie modalu (bez zmian) */
+
+.set-current-btn {
+    display: block; /* Przycisk jako blok, aby łatwiej go wyśrodkować */
+    margin: 20px auto; /* Górny i dolny margines dla odstępu, auto wyśrodkowuje w poziomie */
+    padding: 10px 20px; /* Odpowiednia wielkość przycisku */
+    background-color: #4CAF50; /* Zielony kolor tła */
+    color: white; /* Biały tekst */
+    border: none; /* Brak obramowania */
+    border-radius: 5px; /* Zaokrąglone rogi */
+    cursor: pointer; /* Kursor wskazujący */
+    font-size: 16px; /* Rozmiar czcionki */
+    transition: background-color 0.3s; /* Animacja zmiany koloru tła */
+}
+
+.set-current-btn:hover {
+    background-color: #45a049; /* Ciemniejszy odcień zieleni po najechaniu */
+}
+
+.close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+    margin: 60px 70px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 600px;
+}
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-number, .expiry-date {
+    margin: 5px 0;
+}
+
+.card-name {
+    display: block;
+    margin-top: 10px; /* Odstęp dla nazwy karty */
+    text-align: center; /* Centrowanie nazwy karty */
+}
+
+
+
+.card-btn:hover {
+    background-color: #00397a; /* Deeper blue on hover for contrast */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for lifted effect */
+}
+
+.card-info > span {
+    display: block;
+    margin-bottom: 8px; /* Increased spacing for better readability */
+    font-size: 16px; /* Adjust font size for clarity */
+    color: #f0f0f0; /* Lighter text color for contrast */
+}
+
+.card-info > span:last-child {
+    margin-bottom: 0;
+}
+
+
+.section-divider {
+    border: 0; /* Remove the default border */
+    height: 2px; /* Set the height for the line */
+    background-color: gray; /* Choose a color for the line */
+    margin: 40px 0; /* Add some vertical space around the line */
+}
+
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    top: 50%; /* Centers the button vertically */
+    transform: translateY(-50%); /* Ensures the center of the button aligns with the vertical center */
+    background: #007bff; /* Or any color you prefer */
+    color: white; /* Adjusts arrow color */
+    border-radius: 50%; /* Makes the button round */
+    width: 36px; /* Width of the button */
+    height: 36px; /* Height of the button */
+    z-index: 10; /* Ensures the buttons are above other content */
+}
+
+.swiper-button-prev {
+    left: 10px; /* Adjust as needed to position the left arrow */
+}
+
+.swiper-button-next {
+    right: 10px; /* Adjust as needed to position the right arrow */
+}
+
+/* If the swiper-pagination is overlapping with your buttons, adjust as follows */
+.swiper-pagination {
+    bottom: 10px; /* Adjust distance from the bottom */
+    left: 0;
+    right: 0;
+    text-align: center; /* Centers the pagination */
+}
+
+.card-details {
+    padding: 20px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+    font-family: 'Open Sans', sans-serif;
+    transition: max-height 1.0s ease-in-out;
+    transition-delay: 0.5s; /* Dodaj opóźnienie animacji */
+    overflow: hidden;
+}
+.card-details.active {
+    max-height: 100px; /* Maksymalna wysokość, kiedy sekcja jest rozwinięta */
+    transition-delay: 0s; /* Usuwamy opóźnienie, kiedy sekcja się zwija */
+}
+.card-details label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+}
+
+.card-details input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9; /* Light grey background to indicate non-editable */
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+.card-details input[readonly] {
+    cursor: not-allowed; /* Shows that the fields are not editable */
+}
+
+/* Optional: You might want to add some responsive styles */
+@media (max-width: 768px) {
+    .card-details {
+        padding: 10px;
+    }
+
+    .card-details input {
+        padding: 5px;
+    }
+}
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.transaction-info {
+    flex-grow: 1;
+}
+
+.transaction-actions {
+    /* Adjust as needed for spacing and alignment */
+}
+
+.action-btn {
+    background-color: #f0f0f0; /* Light grey background */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.action-btn:hover {
+    background-color: #e0e0e0; /* Slightly darker on hover */
+}
+
+.action-btn img {
+    width: 24px; /* or whatever size you prefer */
+    height: auto; /* maintain aspect ratio */
+    vertical-align: middle; /* aligns the icon vertically if there's text */
+}
+.show-more-btn {
+    margin-top: 15px;
+    padding: 10px 20px; /* Padding around the text */
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Text size */
+    cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    outline: none; /* Remove outline to avoid a box when clicked */
+}
+
+.show-more-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.show-more-btn:disabled {
+
+    background-color: #cccccc; /* Grayed out background */
+    color: #666666; /* Dark gray text */
+    cursor: not-allowed; /* Cursor indicates the button is disabled */
+}
+/*.site-footer {*/
+/*    background-color: #333;*/
+/*    color: white;*/
+/*    text-align: center;*/
+/*    padding: 40px 0; !* Increase padding for a taller footer *!*/
+/*    margin-top: 40px;*/
+/*    font-size: 14px;*/
+/*    line-height: 1.5;*/
+/*}*/
+
+/*.site-footer .container {*/
+/*    max-width: 1170px;*/
+/*    margin: 0 auto;*/
+/*    padding: 0 15px;*/
+/*}*/
+
+/*.site-footer .footer-content p {*/
+/*    margin-bottom: 10px; !* Add some space between the lines *!*/
+/*}*/
+
+/*.site-footer .footer-content a {*/
+/*    color: #6cace4;*/
+/*    text-decoration: none;*/
+/*    margin: 0 5px; !* Add some space between links *!*/
+/*}*/
+
+/*.site-footer .footer-content a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+/*@media (max-width: 768px) {*/
+/*    .site-footer .container {*/
+/*        padding: 0 30px;*/
+/*    }*/
+
+/*    .site-footer {*/
+/*        padding: 30px 0; !* Smaller padding on smaller screens *!*/
+/*    }*/
+/*}*/
+/*.social-icon {*/
+/*    width: 90px;*/
+/*    height: 90px;*/
+/*    transition: transform 0.3s ease;*/
+/*    cursor: pointer; !* Change cursor to indicate clickable item *!*/
+/*}*/
+
+/*!* Style for the normal state of the Facebook icon *!*/
+/*.fb-icon {*/
+/*    display: inline-block; !* Required for transform *!*/
+/*}*/
+
+/*!* Add a scale transform on click using the :active pseudo-class *!*/
+/*.fb-icon:active {*/
+/*    transform: scale(1.2); !* Increase size by 20% *!*/
+/*}*/
+/*.fb-icon:hover{*/
+/*    transform: scale(1.3);*/
+/*}*/
+
+.site-footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 2rem 0;
+    margin-top: 80px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.footer-container {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.link-section h4 {
+    margin-bottom: 1rem;
+}
+
+.link-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.link-section ul li a {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-section ul li a:hover {
+    color: #007bff;
+}
+
+.newsletter-section {
+    text-align: right;
+}
+
+.newsletter-section p {
+    margin-bottom: 1rem;
+}
+
+.newsletter-section input {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.newsletter-section button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.newsletter-section button:hover {
+    background-color: #0056b3;
+}
+
+.social-links a {
+    color: #6c757d;
+    margin-left: 1rem;
+    font-size: 1.5rem; /* Adjust the size of social icons */
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #007bff;
+}
+
+.footer-legal {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+@media (max-width: 992px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-links, .newsletter-section, .social-links {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .social-links a {
+        margin: 0 0.5rem;
+    }
+}
+.no-scroll {
+    overflow: hidden;
+}
